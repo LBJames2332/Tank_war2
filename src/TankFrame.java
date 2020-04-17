@@ -22,6 +22,7 @@ public class TankFrame extends Frame{
     }
 
     public static void main(String[] args) {
+        System.out.println("动起来");
         TankFrame t = new TankFrame();
     }
 
