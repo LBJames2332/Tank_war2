@@ -4,7 +4,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class TankFrame extends Frame{
+    int x =100;
+    int y =100;
     public TankFrame(){
+        System.out.println(111);
         //constructor
         this.setSize(800,600);
         this.setResizable(false);
@@ -25,7 +28,9 @@ public class TankFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         //随便画
-        g.fillRect(200,100,40,40);
+        g.fillRect(x,y,40,40);
+        x+=50;
+        y+=50;
         System.out.println("paint");
     }
 }
