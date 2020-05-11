@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TankFrame extends Frame{
-    int x =100;
-    int y =100;
-    Dir dir = Dir.DOWN;
-    public static final int Speed = 1;//速度
+    private Tank myTank = new Tank(100,100,Dir.DOWN);
     public TankFrame(){
         //constructor
         this.setSize(800,600);
@@ -26,21 +23,7 @@ public class TankFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         //随便画
-        g.fillRect(x,y,40,40);
-        switch (dir){
-            case LEFT:
-                x-=Speed;
-            case RIGHT:
-                x+=Speed;
-            case UP:
-                y-=Speed;
-            case DOWN:
-                y+=Speed;
-                break;
-            default:
-                break;
-        }
-
+        myTank.paint(g);
     }
     class TankKeyLisener extends KeyAdapter{
         boolean bL = false;
@@ -69,6 +52,7 @@ public class TankFrame extends Frame{
 
             }
             setMainTankDir();
+            repaint();
         }
 
         @Override
@@ -92,14 +76,14 @@ public class TankFrame extends Frame{
 
             }
             setMainTankDir();
-            repaint();
+
         }
 
         public void setMainTankDir(){
-            if (bL) dir = Dir.LEFT;
-            if (bR) dir = Dir.RIGHT;
-            if (bU) dir = Dir.UP;
-            if (bD) dir = Dir.DOWN;
+            if (bL) myTank.setDir(Dir.LEFT);
+            if (bR) myTank.setDir(Dir.RIGHT);
+            if (bU) myTank.setDir(Dir.UP);
+            if (bD) myTank.setDir(Dir.DOWN);
 
         }
     }
