@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class TankFrame extends Frame{
     int x =100;
     int y =100;
-    Direction dir = Direction.DOWN;
+    Dir dir = Dir.DOWN;
     public static final int Speed = 1;//速度
     public TankFrame(){
         //constructor
@@ -30,13 +30,10 @@ public class TankFrame extends Frame{
         switch (dir){
             case LEFT:
                 x-=Speed;
-                break;
             case RIGHT:
                 x+=Speed;
-                break;
             case UP:
                 y-=Speed;
-                break;
             case DOWN:
                 y+=Speed;
                 break;
@@ -95,15 +92,15 @@ public class TankFrame extends Frame{
 
             }
             setMainTankDir();
-
+            repaint();
         }
 
         public void setMainTankDir(){
-            if (bL) dir = Direction.LEFT;
-            if (bR) dir = Direction.RIGHT;
-            if (bU) dir = Direction.UP;
-            if (bD) dir = Direction.DOWN;
-            repaint();
+            if (bL) dir = Dir.LEFT;
+            if (bR) dir = Dir.RIGHT;
+            if (bU) dir = Dir.UP;
+            if (bD) dir = Dir.DOWN;
+
         }
     }
 }
