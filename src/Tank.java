@@ -6,6 +6,15 @@ public class Tank {
     private Position pos = new Position();
     private static  final int SPEED = 10;
     private Dir dir;
+    private boolean isMoving;
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
+    }
 
     public Dir getDir() {
         return dir;
@@ -33,43 +42,30 @@ public class Tank {
 
     public void paint(Graphics g) {
 
-        switch (dir){
-            case LEFT:
-                pos.setX(pos.getX()-SPEED);
-                break;
-            case RIGHT:
-                pos.setX(pos.getX()+SPEED);
-                break;
-            case UP:
-                pos.setY(pos.getY()-SPEED);
-                break;
-            case DOWN:
-                pos.setY(pos.getY()+SPEED);
-                break;
-            default:
-                break;
-        }
+        this.move();
+        g.setColor(Color.WHITE);
         g.fillRect(pos.getX(),pos.getY(),40,40);
     }
-    class Position{
-        int x;
-        int y;
 
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
+    private void move() {
+        if (isMoving){
+            switch (dir){
+                case LEFT:
+                    pos.setX(pos.getX()-SPEED);
+                    break;
+                case RIGHT:
+                    pos.setX(pos.getX()+SPEED);
+                    break;
+                case UP:
+                    pos.setY(pos.getY()-SPEED);
+                    break;
+                case DOWN:
+                    pos.setY(pos.getY()+SPEED);
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
 }
