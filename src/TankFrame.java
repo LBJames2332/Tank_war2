@@ -15,6 +15,7 @@ public class TankFrame extends Frame{
 
     private Tank myTank = new Tank(100,100,Dir.DOWN,this);
     List<Bullet> l_bullet = new ArrayList<>();
+    List<Tank> l_enemies = new ArrayList<>();
     public TankFrame(){
         //constructor
         this.setSize(WIDTH,HEIGHT);
@@ -38,6 +39,9 @@ public class TankFrame extends Frame{
         g.drawString("B_Num:"+l_bullet.size(),10,60);
         g.setColor(color);
         myTank.paint(g);
+        for (int i = 0; i < l_enemies.size(); i++) {
+            l_enemies.get(i).paint(g);
+        }
         for (int i = 0; i < l_bullet.size(); i++) {
             l_bullet.get(i).paint(g);
             if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
