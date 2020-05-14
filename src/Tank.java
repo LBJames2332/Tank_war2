@@ -12,6 +12,26 @@ public class Tank {
     private boolean isMoving;
     private TankFrame tf = null;
     private BufferedImage TANK_image;
+    private boolean isAlive = true;
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+    public void Boom(Bullet bullet) {
+        Rectangle rec_tank = new Rectangle(pos.getX(),pos.getY(),TANK_image.getWidth(),TANK_image.getHeight());
+        Rectangle rec_buillet = new Rectangle(bullet.getPos().getX(),bullet.getPos().getY()
+                ,bullet.getBULLET_image().getWidth(),bullet.getBULLET_image().getHeight());
+        if (rec_tank.intersects(rec_buillet)){
+            this.isAlive = false;
+            bullet.setLiving(false);
+        }
+
+    }
 
     public boolean isMoving() {
         return isMoving;
@@ -49,7 +69,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-
+        if (!isAlive)  return;
         this.move();
         //g.setColor(Color.WHITE);
         g.drawImage(this.TANK_image,pos.getX(),pos.getY(),null);

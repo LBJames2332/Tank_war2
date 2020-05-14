@@ -37,6 +37,7 @@ public class TankFrame extends Frame{
         Color color = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("B_Num:"+l_bullet.size(),10,60);
+        g.drawString("E_Num:"+l_enemies.size(),10,90);
         g.setColor(color);
         myTank.paint(g);
         for (int i = 0; i < l_enemies.size(); i++) {
@@ -45,6 +46,13 @@ public class TankFrame extends Frame{
         for (int i = 0; i < l_bullet.size(); i++) {
             l_bullet.get(i).paint(g);
             if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
+        }
+        for (int i = 0; i < l_enemies.size(); i++) {
+            for (int j = 0; j < l_bullet.size(); j++) {
+                l_enemies.get(i).Boom(l_bullet.get(j));
+                if (!l_bullet.get(j).isLiving())l_bullet.remove(j);
+                if (!l_enemies.get(i).isAlive())l_enemies.remove(i);
+            }
         }
     }
     class TankKeyLisener extends KeyAdapter{
