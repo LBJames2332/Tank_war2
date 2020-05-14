@@ -9,6 +9,10 @@ public class ResourceLoader {
     static BufferedImage Tank_Right;
     static BufferedImage Tank_Up;
     static BufferedImage Tank_Down;
+    static BufferedImage Bullet_Left;
+    static BufferedImage Bullet_Right;
+    static BufferedImage Bullet_Up;
+    static BufferedImage Bullet_Down;
     static {
 
 
@@ -17,6 +21,10 @@ public class ResourceLoader {
             Tank_Right = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
             Tank_Up = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
             Tank_Down = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+            Bullet_Left = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+            Bullet_Right = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            Bullet_Up = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            Bullet_Down = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
         } catch (IOException e) {
             e.printStackTrace();
         }

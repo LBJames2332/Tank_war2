@@ -42,15 +42,20 @@ public class Bullet {
             switch (dir){
                 case LEFT:
                     pos.setX(pos.getX()-SPEED);
+                    g.drawImage(ResourceLoader.Bullet_Left,pos.getX(),pos.getY(),null);
+                    //g.fillOval(pos.getX(),pos.getY(),30,30);
                     break;
                 case RIGHT:
                     pos.setX(pos.getX()+SPEED);
+                    g.drawImage(ResourceLoader.Bullet_Right,pos.getX(),pos.getY(),null);
                     break;
                 case UP:
                     pos.setY(pos.getY()-SPEED);
+                    g.drawImage(ResourceLoader.Bullet_Up,pos.getX(),pos.getY(),null);
                     break;
                 case DOWN:
                     pos.setY(pos.getY()+SPEED);
+                    g.drawImage(ResourceLoader.Bullet_Down,pos.getX(),pos.getY(),null);
                     break;
                 default:
                     break;
@@ -59,7 +64,7 @@ public class Bullet {
         if (pos.getX()<0||pos.getY()<0||pos.getX()>TankFrame.WIDTH||pos.getY()>TankFrame.HEIGHT){
             isLiving = false;
         }
-        g.setColor(Color.orange);
-        g.fillOval(pos.getX(),pos.getY(),30,30);
+        //g.setColor(Color.orange);
+
     }
 }
