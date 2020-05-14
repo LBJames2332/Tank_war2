@@ -13,7 +13,7 @@ public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,100,Dir.DOWN,this,ResourceLoader.Tank_Down);
+    private Tank myTank = new Tank(100,100,Dir.DOWN,this);
     List<Bullet> l_bullet = new ArrayList<>();
     public TankFrame(){
         //constructor
@@ -103,22 +103,10 @@ public class TankFrame extends Frame{
             if (!bL&&!bR&&!bU&&!bD) myTank.setMoving(false);
             else {
                 myTank.setMoving(true);
-                if (bL) {
-                    myTank.setDir(Dir.LEFT);
-                    myTank.setTANK_image(ResourceLoader.Tank_Left);
-                }
-                if (bR) {
-                    myTank.setDir(Dir.RIGHT);
-                    myTank.setTANK_image(ResourceLoader.Tank_Right);
-                }
-                if (bU) {
-                    myTank.setDir(Dir.UP);
-                    myTank.setTANK_image(ResourceLoader.Tank_Up);
-                }
-                if (bD) {
-                    myTank.setDir(Dir.DOWN);
-                    myTank.setTANK_image(ResourceLoader.Tank_Down);
-                }
+                if (bL) myTank.setDir(Dir.LEFT);
+                if (bR)  myTank.setDir(Dir.RIGHT);
+                if (bU) myTank.setDir(Dir.UP);
+                if (bD) myTank.setDir(Dir.DOWN);
 
             }
 

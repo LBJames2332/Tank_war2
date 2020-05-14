@@ -1,4 +1,5 @@
 import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
+import javafx.geometry.Pos;
 import jdk.nashorn.internal.ir.ThrowNode;
 
 import java.awt.*;
@@ -11,13 +12,6 @@ public class Tank {
     private boolean isMoving;
     private TankFrame tf = null;
     private BufferedImage TANK_image;
-    public BufferedImage getTANK_image() {
-        return TANK_image;
-    }
-
-    public void setTANK_image(BufferedImage TANK_image) {
-        this.TANK_image = TANK_image;
-    }
 
     public boolean isMoving() {
         return isMoving;
@@ -33,14 +27,15 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+        SetImage(dir);
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tf,BufferedImage TANK_image) {
+    public Tank(int x, int y, Dir dir,TankFrame tf) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         this.tf = tf;
-        this.TANK_image = TANK_image;
+        SetImage(dir);
     }
 
     public Position getPos() {
@@ -81,9 +76,56 @@ public class Tank {
             }
         }
     }
-
+    private void SetImage(Dir dir) {
+        switch (dir){
+            case LEFT:
+                TANK_image = ResourceLoader.Tank_Left;
+                break;
+            case RIGHT:
+                TANK_image = ResourceLoader.Tank_Right;
+                break;
+            case UP:
+                TANK_image = ResourceLoader.Tank_Up;
+                break;
+            case DOWN:
+                TANK_image = ResourceLoader.Tank_Down;
+                break;
+            default:
+                break;
+        }
+    }
     public void fire() {
-        tf.l_bullet.add(new Bullet(pos.getX(),pos.getY(),dir));
+        switch (dir){
+            case LEFT:
+                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir);
+                bulletl.setPos(pos.getX()-bulletl.getBULLET_image().getWidth(),
+                        pos.getY()+(TANK_image.getHeight()>>1)-(bulletl.getBULLET_image().getHeight()>>1));
+                tf.l_bullet.add(bulletl);
+                break;
+            case RIGHT:
+                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir);
+                bulletr.setPos(pos.getX()+TANK_image.getWidth(),
+                        pos.getY()+(TANK_image.getHeight()>>1)-(bulletr.getBULLET_image().getHeight()>>1));
+
+                tf.l_bullet.add(bulletr);
+                break;
+            case UP:
+                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir);
+                bulletu.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletu.getBULLET_image().getWidth()>>1),
+                        pos.getY()-bulletu.getBULLET_image().getHeight());
+                tf.l_bullet.add(bulletu);
+                break;
+            case DOWN:
+                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir);
+                bulletd.setPos(pos.getY()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
+                        pos.getY()+TANK_image.getHeight());
+
+                tf.l_bullet.add(bulletd);
+                break;
+            default:
+                break;
+        }
+        //tf.l_bullet.add(new Bullet(pos.getX(),pos.getY(),dir));
 
     }
 }
