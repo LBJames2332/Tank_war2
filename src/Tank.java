@@ -1,13 +1,24 @@
 import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
+import jdk.nashorn.internal.ir.ThrowNode;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Tank {
     private Position pos = new Position();
-    private static  final int SPEED = 10;
+    private static  final int SPEED = 5;
     private Dir dir;
     private boolean isMoving;
     private TankFrame tf = null;
+    private BufferedImage TANK_image;
+    public BufferedImage getTANK_image() {
+        return TANK_image;
+    }
+
+    public void setTANK_image(BufferedImage TANK_image) {
+        this.TANK_image = TANK_image;
+    }
+
     public boolean isMoving() {
         return isMoving;
     }
@@ -24,11 +35,12 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tf) {
+    public Tank(int x, int y, Dir dir,TankFrame tf,BufferedImage TANK_image) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         this.tf = tf;
+        this.TANK_image = TANK_image;
     }
 
     public Position getPos() {
@@ -44,8 +56,9 @@ public class Tank {
     public void paint(Graphics g) {
 
         this.move();
-        g.setColor(Color.WHITE);
-        g.fillRect(pos.getX(),pos.getY(),40,40);
+        //g.setColor(Color.WHITE);
+        g.drawImage(this.TANK_image,pos.getX(),pos.getY(),null);
+        ////g.fillRect(pos.getX(),pos.getY(),40,40);
     }
 
     private void move() {
@@ -70,7 +83,7 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullet1 = new Bullet(pos.getX(),pos.getY(),dir);
+        tf.l_bullet.add(new Bullet(pos.getX(),pos.getY(),dir));
 
     }
 }

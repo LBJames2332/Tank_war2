@@ -4,13 +4,17 @@ import jdk.nashorn.internal.ir.IfNode;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,100,Dir.DOWN,this);
-    Bullet bullet1 = new Bullet(300,200,Dir.DOWN);
+    private Tank myTank = new Tank(100,100,Dir.DOWN,this,ResourceLoader.Tank_Down);
+    List<Bullet> l_bullet = new ArrayList<>();
     public TankFrame(){
         //constructor
         this.setSize(WIDTH,HEIGHT);
@@ -29,8 +33,15 @@ public class TankFrame extends Frame{
     @Override
     public void paint(Graphics g) {
         //随便画
+        Color color = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("B_Num:"+l_bullet.size(),10,60);
+        g.setColor(color);
         myTank.paint(g);
-        bullet1.paint(g);
+        for (int i = 0; i < l_bullet.size(); i++) {
+            l_bullet.get(i).paint(g);
+            if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
+        }
     }
     class TankKeyLisener extends KeyAdapter{
         boolean bL = false;
@@ -92,10 +103,22 @@ public class TankFrame extends Frame{
             if (!bL&&!bR&&!bU&&!bD) myTank.setMoving(false);
             else {
                 myTank.setMoving(true);
-                if (bL) myTank.setDir(Dir.LEFT);
-                if (bR) myTank.setDir(Dir.RIGHT);
-                if (bU) myTank.setDir(Dir.UP);
-                if (bD) myTank.setDir(Dir.DOWN);
+                if (bL) {
+                    myTank.setDir(Dir.LEFT);
+                    myTank.setTANK_image(ResourceLoader.Tank_Left);
+                }
+                if (bR) {
+                    myTank.setDir(Dir.RIGHT);
+                    myTank.setTANK_image(ResourceLoader.Tank_Right);
+                }
+                if (bU) {
+                    myTank.setDir(Dir.UP);
+                    myTank.setTANK_image(ResourceLoader.Tank_Up);
+                }
+                if (bD) {
+                    myTank.setDir(Dir.DOWN);
+                    myTank.setTANK_image(ResourceLoader.Tank_Down);
+                }
 
             }
 
