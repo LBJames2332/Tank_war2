@@ -117,7 +117,7 @@ public class Tank {
                 break;
             case DOWN:
                 Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir);
-                bulletd.setPos(pos.getY()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
+                bulletd.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
                         pos.getY()+TANK_image.getHeight());
 
                 tf.l_bullet.add(bulletd);
