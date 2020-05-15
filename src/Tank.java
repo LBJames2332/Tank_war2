@@ -103,10 +103,20 @@ public class Tank {
             }
             if (group==Group.BAD&&new Random().nextInt(10)>8) {
                 this.fire();
-                this.dir = Dir.values()[new Random().nextInt(4)];
+
+                setDir(Dir.values()[new Random().nextInt(4)]);
             }
+            BoundCheck();
         }
     }
+
+    private void BoundCheck() {
+        if (pos.getX()<0)pos.setX(0);
+        if (pos.getX()>tf.getWidth()-TANK_image.getWidth())pos.setX(tf.getWidth()-TANK_image.getWidth());
+        if (pos.getY()<0)pos.setY(0);
+        if (pos.getY()>tf.getHeight()-TANK_image.getHeight())pos.setY(tf.getHeight()-TANK_image.getHeight());
+    }
+
     private void SetImage(Dir dir) {
         switch (dir){
             case LEFT:
