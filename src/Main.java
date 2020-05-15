@@ -1,7 +1,8 @@
 public class Main {
     public static void main(String[] args) {
         TankFrame tankFrame = new TankFrame();
-        for (int i = 0; i < 5; i++) {
+        int inialCount = Integer.parseInt((String)PropertyMgr.get("ECountInit"));
+        for (int i = 0; i < inialCount; i++) {
             tankFrame.l_enemies.add(new Tank(50+i*60,200,Dir.DOWN,tankFrame,Group.BAD));
         }
         Thread t = new Thread(()->{
