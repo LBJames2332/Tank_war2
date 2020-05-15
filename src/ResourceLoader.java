@@ -13,6 +13,7 @@ public class ResourceLoader {
     static BufferedImage Bullet_Right;
     static BufferedImage Bullet_Up;
     static BufferedImage Bullet_Down;
+    static BufferedImage[] Boom = new BufferedImage[16];
     static {
 
 
@@ -25,6 +26,9 @@ public class ResourceLoader {
             Bullet_Right = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
             Bullet_Up = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
             Bullet_Down = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            for (int i = 0; i < Boom.length; i++) {
+                Boom[i] = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream("images/e"+(i+1)+".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
