@@ -4,12 +4,13 @@ import jdk.nashorn.internal.ir.ThrowNode;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Tank {
     private Position pos = new Position();
-    private static  final int SPEED = 5;
+    private static  final int SPEED = 1;
     private Dir dir;
-    private boolean isMoving;
+    private boolean isMoving = true;
     private TankFrame tf = null;
     private BufferedImage TANK_image;
     private boolean isAlive = true;
@@ -23,6 +24,7 @@ public class Tank {
     }
 
     public void Boom(Bullet bullet) {
+        if (bullet.getResourcer()==this) return;
         Rectangle rec_tank = new Rectangle(pos.getX(),pos.getY(),TANK_image.getWidth(),TANK_image.getHeight());
         Rectangle rec_buillet = new Rectangle(bullet.getPos().getX(),bullet.getPos().getY()
                 ,bullet.getBULLET_image().getWidth(),bullet.getBULLET_image().getHeight());
@@ -69,7 +71,10 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if (!isAlive)  return;
+        if (!isAlive)  {
+            tf.l_enemies.remove(this);
+            return;
+        }
         this.move();
         //g.setColor(Color.WHITE);
         g.drawImage(this.TANK_image,pos.getX(),pos.getY(),null);
@@ -94,6 +99,7 @@ public class Tank {
                 default:
                     break;
             }
+            if (new Random().nextInt(10)>8) this.fire();
         }
     }
     private void SetImage(Dir dir) {
@@ -117,26 +123,26 @@ public class Tank {
     public void fire() {
         switch (dir){
             case LEFT:
-                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir);
+                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
                 bulletl.setPos(pos.getX()-bulletl.getBULLET_image().getWidth(),
                         pos.getY()+(TANK_image.getHeight()>>1)-(bulletl.getBULLET_image().getHeight()>>1));
                 tf.l_bullet.add(bulletl);
                 break;
             case RIGHT:
-                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir);
+                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
                 bulletr.setPos(pos.getX()+TANK_image.getWidth(),
                         pos.getY()+(TANK_image.getHeight()>>1)-(bulletr.getBULLET_image().getHeight()>>1));
 
                 tf.l_bullet.add(bulletr);
                 break;
             case UP:
-                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir);
+                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
                 bulletu.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletu.getBULLET_image().getWidth()>>1),
                         pos.getY()-bulletu.getBULLET_image().getHeight());
                 tf.l_bullet.add(bulletu);
                 break;
             case DOWN:
-                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir);
+                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
                 bulletd.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
                         pos.getY()+TANK_image.getHeight());
 

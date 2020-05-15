@@ -13,7 +13,7 @@ public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,100,Dir.DOWN,this);
+    private Tank myTank = new Tank(100,400,Dir.DOWN,this);
     List<Bullet> l_bullet = new ArrayList<>();
     List<Tank> l_enemies = new ArrayList<>();
     public TankFrame(){
@@ -45,13 +45,11 @@ public class TankFrame extends Frame{
         }
         for (int i = 0; i < l_bullet.size(); i++) {
             l_bullet.get(i).paint(g);
-            if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
+            //if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
         }
         for (int i = 0; i < l_enemies.size(); i++) {
             for (int j = 0; j < l_bullet.size(); j++) {
                 l_enemies.get(i).Boom(l_bullet.get(j));
-                if (!l_bullet.get(j).isLiving())l_bullet.remove(j);
-                if (!l_enemies.get(i).isAlive())l_enemies.remove(i);
             }
         }
     }

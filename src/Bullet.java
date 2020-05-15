@@ -7,7 +7,17 @@ public class Bullet {
     private Dir dir;
     private boolean isLiving = true;
     private BufferedImage BULLET_image;
+    private TankFrame tankFrame;
 
+    public Tank getResourcer() {
+        return resourcer;
+    }
+
+    public void setResourcer(Tank resourcer) {
+        this.resourcer = resourcer;
+    }
+
+    private Tank resourcer;
     public BufferedImage getBULLET_image() {
         return BULLET_image;
     }
@@ -25,11 +35,13 @@ public class Bullet {
         SetImage(dir);
     }
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Tank resourcer) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         SetImage(dir);
+        this.tankFrame = tankFrame;
+        this.resourcer = resourcer;
     }
 
     private void SetImage(Dir dir) {
@@ -70,29 +82,34 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        if (isLiving){
-            switch (dir){
-                case LEFT:
-                    pos.setX(pos.getX()-SPEED);
-                    g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
-                    //g.fillOval(pos.getX(),pos.getY(),30,30);
-                    break;
-                case RIGHT:
-                    pos.setX(pos.getX()+SPEED);
-                    g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
-                    break;
-                case UP:
-                    pos.setY(pos.getY()-SPEED);
-                    g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
-                    break;
-                case DOWN:
-                    pos.setY(pos.getY()+SPEED);
-                    g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
-                    break;
-                default:
-                    break;
-            }
+        if (!isLiving){
+            tankFrame.l_bullet.remove(this);
+            return;
+            //return;
         }
+
+        switch (dir){
+            case LEFT:
+                pos.setX(pos.getX()-SPEED);
+                g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
+                //g.fillOval(pos.getX(),pos.getY(),30,30);
+                break;
+            case RIGHT:
+                pos.setX(pos.getX()+SPEED);
+                g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
+                break;
+            case UP:
+                pos.setY(pos.getY()-SPEED);
+                g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
+                break;
+            case DOWN:
+                pos.setY(pos.getY()+SPEED);
+                g.drawImage(BULLET_image,pos.getX(),pos.getY(),null);
+                break;
+            default:
+                break;
+        }
+
         if (pos.getX()<0||pos.getY()<0||pos.getX()>TankFrame.WIDTH||pos.getY()>TankFrame.HEIGHT){
             isLiving = false;
         }
