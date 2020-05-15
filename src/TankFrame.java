@@ -16,7 +16,7 @@ public class TankFrame extends Frame{
     private Tank myTank = new Tank(100,400,Dir.DOWN,this);
     List<Bullet> l_bullet = new ArrayList<>();
     List<Tank> l_enemies = new ArrayList<>();
-    Explod explod = new Explod(100,100);
+    List<Explod> l_explod = new ArrayList<>();
     public TankFrame(){
         //constructor
         this.setSize(WIDTH,HEIGHT);
@@ -41,7 +41,9 @@ public class TankFrame extends Frame{
         g.drawString("E_Num:"+l_enemies.size(),10,90);
         g.setColor(color);
         myTank.paint(g);
-        explod.paint(g);
+        for (int i = 0; i < l_explod.size(); i++) {
+            l_explod.get(i).paint(g);
+        }
         for (int i = 0; i < l_enemies.size(); i++) {
             l_enemies.get(i).paint(g);
         }

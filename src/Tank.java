@@ -73,6 +73,7 @@ public class Tank {
     public void paint(Graphics g) {
         if (!isAlive)  {
             tf.l_enemies.remove(this);
+            tf.l_explod.add(new Explod(this.pos.getX(),this.pos.getY()));
             return;
         }
         this.move();
