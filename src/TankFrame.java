@@ -13,7 +13,7 @@ public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,400,Dir.DOWN,this);
+    private Tank myTank = new Tank(100,400,Dir.DOWN,this,Group.GOOD);
     List<Bullet> l_bullet = new ArrayList<>();
     List<Tank> l_enemies = new ArrayList<>();
     List<Explod> l_explod = new ArrayList<>();
@@ -39,6 +39,7 @@ public class TankFrame extends Frame{
         g.setColor(Color.WHITE);
         g.drawString("B_Num:"+l_bullet.size(),10,60);
         g.drawString("E_Num:"+l_enemies.size(),10,90);
+        g.drawString("Boom_Num:"+l_explod.size(),10,120);
         g.setColor(color);
         myTank.paint(g);
         for (int i = 0; i < l_explod.size(); i++) {

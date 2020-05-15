@@ -14,7 +14,7 @@ public class Tank {
     private TankFrame tf = null;
     private BufferedImage TANK_image;
     private boolean isAlive = true;
-
+    private Group group;
     public boolean isAlive() {
         return isAlive;
     }
@@ -24,7 +24,7 @@ public class Tank {
     }
 
     public void Boom(Bullet bullet) {
-        if (bullet.getResourcer()==this) return;
+        if (bullet.getGroup().equals(group)) return;
         Rectangle rec_tank = new Rectangle(pos.getX(),pos.getY(),TANK_image.getWidth(),TANK_image.getHeight());
         Rectangle rec_buillet = new Rectangle(bullet.getPos().getX(),bullet.getPos().getY()
                 ,bullet.getBULLET_image().getWidth(),bullet.getBULLET_image().getHeight());
@@ -52,12 +52,13 @@ public class Tank {
         SetImage(dir);
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tf) {
+    public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         this.tf = tf;
         SetImage(dir);
+        this.group = group;
     }
 
     public Position getPos() {
@@ -73,7 +74,7 @@ public class Tank {
     public void paint(Graphics g) {
         if (!isAlive)  {
             tf.l_enemies.remove(this);
-            tf.l_explod.add(new Explod(this.pos.getX(),this.pos.getY()));
+            tf.l_explod.add(new Explod(this.pos.getX(),this.pos.getY(),tf));
             return;
         }
         this.move();
@@ -100,7 +101,10 @@ public class Tank {
                 default:
                     break;
             }
-            if (new Random().nextInt(10)>8) this.fire();
+            if (group==Group.BAD&&new Random().nextInt(10)>8) {
+                this.fire();
+                this.dir = Dir.values()[new Random().nextInt(4)];
+            }
         }
     }
     private void SetImage(Dir dir) {
@@ -124,26 +128,26 @@ public class Tank {
     public void fire() {
         switch (dir){
             case LEFT:
-                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
+                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
                 bulletl.setPos(pos.getX()-bulletl.getBULLET_image().getWidth(),
                         pos.getY()+(TANK_image.getHeight()>>1)-(bulletl.getBULLET_image().getHeight()>>1));
                 tf.l_bullet.add(bulletl);
                 break;
             case RIGHT:
-                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
+                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
                 bulletr.setPos(pos.getX()+TANK_image.getWidth(),
                         pos.getY()+(TANK_image.getHeight()>>1)-(bulletr.getBULLET_image().getHeight()>>1));
 
                 tf.l_bullet.add(bulletr);
                 break;
             case UP:
-                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
+                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
                 bulletu.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletu.getBULLET_image().getWidth()>>1),
                         pos.getY()-bulletu.getBULLET_image().getHeight());
                 tf.l_bullet.add(bulletu);
                 break;
             case DOWN:
-                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir,tf,this);
+                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
                 bulletd.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
                         pos.getY()+TANK_image.getHeight());
 

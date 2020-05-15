@@ -8,7 +8,7 @@ public class Bullet {
     private boolean isLiving = true;
     private BufferedImage BULLET_image;
     private TankFrame tankFrame;
-
+    private Group group;
     public Tank getResourcer() {
         return resourcer;
     }
@@ -35,13 +35,22 @@ public class Bullet {
         SetImage(dir);
     }
 
-    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Tank resourcer) {
+    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Tank resourcer,Group group) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         SetImage(dir);
         this.tankFrame = tankFrame;
         this.resourcer = resourcer;
+        this.group = group;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     private void SetImage(Dir dir) {
