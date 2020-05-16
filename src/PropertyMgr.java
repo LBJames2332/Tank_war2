@@ -10,6 +10,10 @@ public class PropertyMgr {
             e.printStackTrace();
         }
     }
+
+    private PropertyMgr() {
+    }
+
     public static Object get(String key){
         if (properties==null) return null;
         return properties.get(key);

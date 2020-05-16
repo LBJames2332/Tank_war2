@@ -12,6 +12,31 @@ public class Tank {
     private Dir dir;
     private boolean isMoving = true;
     private TankFrame tf = null;
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
+
+    public BufferedImage getTANK_image() {
+        return TANK_image;
+    }
+
+    public void setTANK_image(BufferedImage TANK_image) {
+        this.TANK_image = TANK_image;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     private BufferedImage TANK_image;
     private boolean isAlive = true;
     private Group group;
@@ -102,7 +127,7 @@ public class Tank {
                     break;
             }
             if (group==Group.BAD&&new Random().nextInt(10)>8) {
-                this.fire();
+                this.fire(new TankFirer1());
 
                 setDir(Dir.values()[new Random().nextInt(4)]);
             }
@@ -135,38 +160,93 @@ public class Tank {
                 break;
         }
     }
-    public void fire() {
-        switch (dir){
-            case LEFT:
-                Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
-                bulletl.setPos(pos.getX()-bulletl.getBULLET_image().getWidth(),
-                        pos.getY()+(TANK_image.getHeight()>>1)-(bulletl.getBULLET_image().getHeight()>>1));
-                tf.l_bullet.add(bulletl);
-                break;
-            case RIGHT:
-                Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
-                bulletr.setPos(pos.getX()+TANK_image.getWidth(),
-                        pos.getY()+(TANK_image.getHeight()>>1)-(bulletr.getBULLET_image().getHeight()>>1));
-
-                tf.l_bullet.add(bulletr);
-                break;
-            case UP:
-                Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
-                bulletu.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletu.getBULLET_image().getWidth()>>1),
-                        pos.getY()-bulletu.getBULLET_image().getHeight());
-                tf.l_bullet.add(bulletu);
-                break;
-            case DOWN:
-                Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir,tf,this,group);
-                bulletd.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
-                        pos.getY()+TANK_image.getHeight());
-
-                tf.l_bullet.add(bulletd);
-                break;
-            default:
-                break;
-        }
-        //tf.l_bullet.add(new Bullet(pos.getX(),pos.getY(),dir));
+    public void fire(Firer firer) {
+        firer.fire(this);
 
     }
+    /*class TankFirer1 implements Firer{
+        @Override
+        public void fire() {
+            switch (dir){
+                case LEFT:
+                    Bullet bulletl = new Bullet(pos.getX(),pos.getY(),dir,tf,group);
+                    bulletl.setPos(pos.getX()-bulletl.getBULLET_image().getWidth(),
+                            pos.getY()+(TANK_image.getHeight()>>1)-(bulletl.getBULLET_image().getHeight()>>1));
+                    tf.l_bullet.add(bulletl);
+                    break;
+                case RIGHT:
+                    Bullet bulletr = new Bullet(pos.getX(),pos.getY(),dir,tf,group);
+                    bulletr.setPos(pos.getX()+TANK_image.getWidth(),
+                            pos.getY()+(TANK_image.getHeight()>>1)-(bulletr.getBULLET_image().getHeight()>>1));
+
+                    tf.l_bullet.add(bulletr);
+                    break;
+                case UP:
+                    Bullet bulletu = new Bullet(pos.getX(),pos.getY(),dir,tf,group);
+                    bulletu.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletu.getBULLET_image().getWidth()>>1),
+                            pos.getY()-bulletu.getBULLET_image().getHeight());
+                    tf.l_bullet.add(bulletu);
+                    break;
+                case DOWN:
+                    Bullet bulletd = new Bullet(pos.getX(),pos.getY(),dir,tf,group);
+                    bulletd.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bulletd.getBULLET_image().getWidth()>>1),
+                            pos.getY()+TANK_image.getHeight());
+
+                    tf.l_bullet.add(bulletd);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }*/
+    /**class TankFirer4dir implements Firer{
+        @Override
+        public void fire() {
+            int x,y;
+            Bullet[] bullets = new Bullet[Dir.values().length];
+            for (int i = 0; i < bullets.length; i++) {
+                bullets[i] = new Bullet(pos.getX(),pos.getY(),Dir.values()[i],tf,group);
+            }
+
+            switch (dir){
+                case LEFT:
+                    for (Bullet bullet:bullets){
+                        bullet.setPos(pos.getX()-bullet.getBULLET_image().getWidth(),
+                                pos.getY()+(TANK_image.getHeight()>>1)-(bullet.getBULLET_image().getHeight()>>1));
+                        tf.l_bullet.add(bullet);
+                    }
+
+                    break;
+                case RIGHT:
+                    for (Bullet bullet:bullets){
+                        bullet.setPos(pos.getX()+TANK_image.getWidth(),
+                                pos.getY()+(TANK_image.getHeight()>>1)-(bullet.getBULLET_image().getHeight()>>1));
+                        tf.l_bullet.add(bullet);
+                    }
+
+
+                    break;
+                case UP:
+                    for (Bullet bullet:bullets){
+                        bullet.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bullet.getBULLET_image().getWidth()>>1),
+                                pos.getY()-bullet.getBULLET_image().getHeight());
+                        tf.l_bullet.add(bullet);
+                    }
+
+                    break;
+                case DOWN:
+                    for (Bullet bullet:bullets){
+                        bullet.setPos(pos.getX()+(TANK_image.getWidth()>>1)-(bullet.getBULLET_image().getWidth()>>1),
+                                pos.getY()+TANK_image.getHeight());
+                        tf.l_bullet.add(bullet);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+    }*/
+
 }

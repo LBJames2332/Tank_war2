@@ -9,15 +9,15 @@ public class Bullet {
     private BufferedImage BULLET_image;
     private TankFrame tankFrame;
     private Group group;
-    public Tank getResourcer() {
+    /*public Tank getResourcer() {
         return resourcer;
     }
 
     public void setResourcer(Tank resourcer) {
         this.resourcer = resourcer;
-    }
+    }*/
 
-    private Tank resourcer;
+    //private Tank resourcer;
     public BufferedImage getBULLET_image() {
         return BULLET_image;
     }
@@ -35,13 +35,13 @@ public class Bullet {
         SetImage(dir);
     }
 
-    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Tank resourcer,Group group) {
+    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.dir = dir;
         SetImage(dir);
         this.tankFrame = tankFrame;
-        this.resourcer = resourcer;
+        //this.resourcer = resourcer;
         this.group = group;
     }
 

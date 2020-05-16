@@ -32,13 +32,6 @@ public class ResourceLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //loadImage(Tank_Left,"images/tankL.gif");
     }
-//    static void loadImage(Image image, String sourcePath){
-//        try {
-//            image = ImageIO.read(ResourceLoader.class.getClassLoader().getResourceAsStream(sourcePath));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 }
