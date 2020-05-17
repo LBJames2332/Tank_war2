@@ -1,21 +1,20 @@
-import com.sun.javafx.scene.traversal.Direction;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import jdk.nashorn.internal.ir.IfNode;
+package Objects;
+
+import Objects.Dir;
+import Objects.Group;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,400,Dir.DOWN,this,Group.GOOD);
+    private Tank myTank = new Tank(100,400,this,true,Dir.DOWN, true,Group.GOOD);
     List<Bullet> l_bullet = new ArrayList<>();
-    List<Tank> l_enemies = new ArrayList<>();
+    public List<Tank> l_enemies = new ArrayList<>();
     List<Explod> l_explod = new ArrayList<>();
     public TankFrame(){
         //constructor
