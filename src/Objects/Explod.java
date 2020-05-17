@@ -1,9 +1,5 @@
 package Objects;
 
-import Objects.Position;
-import Objects.ResourceLoader;
-import Objects.TankFrame;
-
 import java.awt.*;
 
 public class Explod extends I__GameObj{

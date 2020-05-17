@@ -2,19 +2,31 @@ package Objects;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public abstract class I__GameObj {
     private Position pos = new Position();
     private TankFrame tf = null;
     private BufferedImage image;
     private boolean isAlive = true;
+    private Rectangle rec;
 
-    public I__GameObj(int x,int y, TankFrame tf, boolean isAlive) {
+    public Rectangle getRec() {
+        return rec;
+    }
+
+    public void setRec() {
+        this.rec.x = pos.getX();
+        this.rec.y = pos.getY();
+        this.rec.height = image.getHeight();
+        this.rec.width = image.getWidth();
+    }
+
+    public I__GameObj(int x, int y, TankFrame tf, boolean isAlive) {
         this.pos.setX(x);
         this.pos.setY(y);
         this.tf = tf;
         this.isAlive = isAlive;
+        rec = new Rectangle(x,y,0,0);
     }
 
     public TankFrame getTf() {

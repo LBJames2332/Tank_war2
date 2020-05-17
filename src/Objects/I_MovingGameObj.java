@@ -1,6 +1,5 @@
 package Objects;
 
-import java.awt.image.BufferedImage;
 
 public abstract class I_MovingGameObj extends I__GameObj{
     private int SPEED;

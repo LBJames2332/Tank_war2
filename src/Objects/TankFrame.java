@@ -1,8 +1,5 @@
 package Objects;
 
-import Objects.Dir;
-import Objects.Group;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -125,15 +122,16 @@ public class TankFrame extends Frame{
             }
 
         }
-        /**
-         * 取消闪烁
-         */
+
 
     }
     Image offScreenImage = null;
 
     @Override
     public void update(Graphics g) {
+        /**
+         * 取消闪烁
+         */
         if (offScreenImage==null){
             offScreenImage = this.createImage(WIDTH,HEIGHT);
         }

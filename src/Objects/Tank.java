@@ -104,10 +104,9 @@ public class Tank extends I_MovingGameObj{
 
     public void Boom(Bullet bullet) {
         if (bullet.getGroup().equals(getGroup())) return;
-        Rectangle rec_tank = new Rectangle(getPos().getX(),getPos().getY(),getImage().getWidth(),getImage().getHeight());
-        Rectangle rec_buillet = new Rectangle(bullet.getPos().getX(),bullet.getPos().getY()
-                ,bullet.getImage().getWidth(),bullet.getImage().getHeight());
-        if (rec_tank.intersects(rec_buillet)){
+        setRec();
+        bullet.setRec();
+        if (this.getRec().intersects(bullet.getRec())){
             setAlive(false);
             bullet.setAlive(false);
         }
