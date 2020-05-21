@@ -1,4 +1,7 @@
-package Objects;
+package Objects.GameObjs;
+
+import Objects.AttributeClasses.Position;
+import MainClasses.TankFrame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

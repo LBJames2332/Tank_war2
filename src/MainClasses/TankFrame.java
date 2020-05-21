@@ -1,5 +1,13 @@
-package Objects;
+package MainClasses;
 
+import Factory.CommonFactory;
+import Factory.I_Factory;
+import Objects.AttributeClasses.Dir;
+import Objects.AttributeClasses.Group;
+import Objects.FirerStrategy.TankFirer_4dir;
+import Objects.GameObjs.Bullet;
+import Objects.GameObjs.Explod;
+import Objects.GameObjs.Tank;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -9,13 +17,35 @@ public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank = new Tank(100,400,this,true,Dir.DOWN, true,Group.GOOD);
+    private Tank myTank;
+    private I_Factory factory = new CommonFactory();
     List<Bullet> l_bullet = new ArrayList<>();
-    public List<Tank> l_enemies = new ArrayList<>();
+    List<Tank> l_enemies = new ArrayList<>();
     List<Explod> l_explod = new ArrayList<>();
-    public TankFrame(){
+
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public List<Bullet> getL_bullet() {
+        return l_bullet;
+    }
+
+    public List<Tank> getL_enemies() {
+        return l_enemies;
+    }
+
+    public List<Explod> getL_explod() {
+        return l_explod;
+    }
+
+    public TankFrame() {
         //constructor
-        this.setSize(WIDTH,HEIGHT);
+        this.setSize(WIDTH, HEIGHT);
         this.setResizable(false);
 
         this.setVisible(true);
@@ -26,8 +56,12 @@ public class TankFrame extends Frame{
                 System.exit(0);
             }
         });
+        myTank = factory.CreateTank(100, 400, this, true, Dir.DOWN, true, Group.GOOD);
+        int inialCount = Integer.parseInt((String) PropertyMgr.get("ECountInit"));
+        for (int i = 0; i < inialCount; i++) {
+            this.l_enemies.add(factory.CreateTank(50 + i * 60, 200, this, true, Dir.DOWN, true, Group.BAD));
+        }
     }
-
     @Override
     public void paint(Graphics g) {
         //随便画

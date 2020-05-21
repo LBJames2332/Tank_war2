@@ -1,5 +1,9 @@
-package Objects;
+package Objects.GameObjs;
 
+
+import Objects.AttributeClasses.Dir;
+import Objects.AttributeClasses.Group;
+import MainClasses.TankFrame;
 
 public abstract class I_MovingGameObj extends I__GameObj{
     private int SPEED;
@@ -10,7 +14,7 @@ public abstract class I_MovingGameObj extends I__GameObj{
         return group;
     }
 
-    public I_MovingGameObj(int x, int y, TankFrame tf, boolean isAlive,Dir dir,Group group) {
+    public I_MovingGameObj(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
 
         super(x, y, tf, isAlive);
         this.dir = dir;

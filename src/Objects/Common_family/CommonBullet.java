@@ -1,15 +1,18 @@
-package Objects;
+package Objects.Common_family;
 
 import java.awt.*;
 
-public class Bullet extends I_MovingGameObj{
+import MainClasses.TankFrame;
+import Objects.AttributeClasses.Dir;
+import Objects.AttributeClasses.Group;
+import Objects.GameObjs.Bullet;
+import MainClasses.ResourceLoader;
+public class CommonBullet extends Bullet {
 
-    public Bullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
+
+    public CommonBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
         super(x, y, tf, isAlive, dir, group);
-        SetImage(dir);
-        super.setSPEED(10);
     }
-
     @Override
     protected void move() {
         switch (getDir()){
@@ -34,16 +37,16 @@ public class Bullet extends I_MovingGameObj{
     protected void SetImage(Dir dir) {
         switch (dir){
             case LEFT:
-                setImage(ResourceLoader.Bullet_Left);
+                setImage(ResourceLoader.getBullet_Left());
                 break;
             case RIGHT:
-                setImage(ResourceLoader.Bullet_Right);
+                setImage(ResourceLoader.getBullet_Right());
                 break;
             case UP:
-                setImage(ResourceLoader.Bullet_Up);
+                setImage(ResourceLoader.getBullet_Up());
                 break;
             case DOWN:
-                setImage(ResourceLoader.Bullet_Down);
+                setImage(ResourceLoader.getBullet_Down());
                 break;
             default:
                 break;
@@ -53,7 +56,7 @@ public class Bullet extends I_MovingGameObj{
     @Override
     public void paint(Graphics g) {
         if (!isAlive()){
-            getTf().l_bullet.remove(this);
+            getTf().getL_bullet().remove(this);
             return;
         }
         move();
@@ -74,9 +77,8 @@ public class Bullet extends I_MovingGameObj{
                 break;
         }
 
-        if (getPos().getX()<0||getPos().getY()<0||getPos().getX()>TankFrame.WIDTH||getPos().getY()>TankFrame.HEIGHT){
+        if (getPos().getX()<0||getPos().getY()<0||getPos().getX()> TankFrame.getWIDTH()||getPos().getY()> TankFrame.getHEIGHT()){
             setAlive(false);
         }
-
     }
 }

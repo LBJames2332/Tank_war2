@@ -1,4 +1,4 @@
-package Objects;
+package Objects.AttributeClasses;
 
 public class Position{
     private int x;

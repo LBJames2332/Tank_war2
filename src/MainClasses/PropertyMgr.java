@@ -1,8 +1,10 @@
+package MainClasses;
+
 import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyMgr {
-    static Properties properties = new Properties();
+    public static Properties properties = new Properties();
     static {
         try {
             properties.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));

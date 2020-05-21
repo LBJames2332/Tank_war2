@@ -1,4 +1,4 @@
-package Objects;
+package MainClasses;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,43 @@ public class ResourceLoader {
     static BufferedImage Tank_Left;
     static BufferedImage Tank_Right;
     static BufferedImage Tank_Up;
+
+    public static BufferedImage getTank_Left() {
+        return Tank_Left;
+    }
+
+    public static BufferedImage getTank_Right() {
+        return Tank_Right;
+    }
+
+    public static BufferedImage getTank_Up() {
+        return Tank_Up;
+    }
+
+    public static BufferedImage getTank_Down() {
+        return Tank_Down;
+    }
+
+    public static BufferedImage getBullet_Left() {
+        return Bullet_Left;
+    }
+
+    public static BufferedImage getBullet_Right() {
+        return Bullet_Right;
+    }
+
+    public static BufferedImage getBullet_Up() {
+        return Bullet_Up;
+    }
+
+    public static BufferedImage getBullet_Down() {
+        return Bullet_Down;
+    }
+
+    public static BufferedImage[] getBoom() {
+        return Boom;
+    }
+
     static BufferedImage Tank_Down;
     static BufferedImage Bullet_Left;
     static BufferedImage Bullet_Right;
