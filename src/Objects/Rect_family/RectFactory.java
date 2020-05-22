@@ -1,5 +1,6 @@
-package Factory;
+package Objects.Rect_family;
 
+import Factory.I_Factory;
 import MainClasses.TankFrame;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
@@ -7,21 +8,21 @@ import Objects.GameObjs.Bullet;
 import Objects.GameObjs.Explod;
 import Objects.GameObjs.Tank;
 
-public class RectFactory extends I_Factory{
+public class RectFactory extends I_Factory {
 
 
     @Override
     public Tank CreateTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
-        return null;
+        return new RectTank(x,y,tf,isAlive,dir,isMoving,group);
     }
 
     @Override
     public Bullet CreateBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
-        return null;
+        return new RectBullet(x,y,tf,isAlive,dir,group);
     }
 
     @Override
     public Explod CreateExplod(int x, int y, TankFrame tf, boolean isAlive) {
-        return null;
+        return new RectExplod(x,y,tf,isAlive);
     }
 }

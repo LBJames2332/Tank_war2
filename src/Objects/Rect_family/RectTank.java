@@ -1,9 +1,9 @@
-package Objects.Common_family;
+package Objects.Rect_family;
 
-import MainClasses.ResourceLoader;
 import MainClasses.TankFrame;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
+import Objects.Common_family.CommonExplod;
 import Objects.FirerStrategy.Firer;
 import Objects.FirerStrategy.TankFirer1;
 import Objects.GameObjs.Bullet;
@@ -13,10 +13,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class CommonTank extends Tank {
-    BufferedImage image;
-
-    public CommonTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
+public class RectTank extends Tank {
+    int Width=50;
+    int Height=50;
+    public RectTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
         super(x, y, tf, isAlive, dir, isMoving, group);
     }
 
@@ -25,9 +25,9 @@ public class CommonTank extends Tank {
     @Override
     protected void BoundCheck() {
         if (getPos().getX()<0) setPos(0,getPos().getY());
-        if (getPos().getX()>getTf().getWidth()-image.getWidth()) setPos(getTf().getWidth()-image.getWidth(),getPos().getY());
+        if (getPos().getX()>getTf().getWidth()-Width) setPos(getTf().getWidth()-Width,getPos().getY());
         if (getPos().getY()<0) setPos(getPos().getX(),0);
-        if (getPos().getY()>getTf().getHeight()-image.getHeight()) setPos(getPos().getX(),getTf().getHeight()-image.getHeight());
+        if (getPos().getY()>getTf().getHeight()-Height) setPos(getPos().getX(),getTf().getHeight()-Height);
     }
 
     @Override
@@ -75,34 +75,15 @@ public class CommonTank extends Tank {
             BoundCheck();
         }
     }
-    protected void SetImage(Dir dir) {
-        switch (dir){
-
-            case LEFT:
-                image = ResourceLoader.getTank_Left();
-                break;
-            case RIGHT:
-                image = ResourceLoader.getTank_Right();
-                break;
-            case UP:
-                image = ResourceLoader.getTank_Up();
-                break;
-            case DOWN:
-                image = ResourceLoader.getTank_Down();
-                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     public int getWidth() {
-        return image.getWidth();
+        return Width;
     }
 
     @Override
     public int getHeight() {
-        return image.getHeight();
+        return Height;
     }
 
     @Override
@@ -110,14 +91,14 @@ public class CommonTank extends Tank {
         if (!isAlive())  {
 
             getTf().getL_enemies().remove(this);
-            getTf().getL_explod().add(new CommonExplod(this.getPos().getX(),this.getPos().getY(),getTf(),false));
+            getTf().getL_explod().add(getTf().getFactory().CreateExplod(this.getPos().getX(), this.getPos().getY(), getTf(), false));
             return;
         }
-        SetImage(super.getDir());
         this.move();
-
-        g.drawImage(image,super.getPos().getX(),super.getPos().getY(),null);
-
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(super.getPos().getX(),super.getPos().getY(),Width,Height);
+        g.setColor(color);
     }
 
 }

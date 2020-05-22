@@ -1,17 +1,18 @@
-package Objects.Common_family;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+package Objects.Rect_family;
 
 import MainClasses.TankFrame;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import Objects.GameObjs.Bullet;
-import MainClasses.ResourceLoader;
-public class CommonBullet extends Bullet {
-    BufferedImage image;
 
-    public CommonBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class RectBullet extends Bullet {
+    int Width=20;
+    int Height=20;
+
+    public RectBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
         super(x, y, tf, isAlive, dir, group);
     }
     @Override
@@ -33,33 +34,15 @@ public class CommonBullet extends Bullet {
                 break;
         }
     }
-    protected void SetImage(Dir dir) {
-        switch (dir){
-            case LEFT:
-                image = ResourceLoader.getBullet_Left();
-                break;
-            case RIGHT:
-                image = ResourceLoader.getBullet_Right();
-                break;
-            case UP:
-                image = ResourceLoader.getBullet_Up();
-                break;
-            case DOWN:
-                image = ResourceLoader.getBullet_Down();
-                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     public int getWidth() {
-        return image.getWidth();
+        return Width;
     }
 
     @Override
     public int getHeight() {
-        return image.getHeight();
+        return Height;
     }
 
     @Override
@@ -69,8 +52,10 @@ public class CommonBullet extends Bullet {
             return;
         }
         move();
-        g.drawImage(image,getPos().getX(),getPos().getY(),null);
-
+        Color color = g.getColor();
+        g.setColor(Color.WHITE);
+        g.fillRect(getPos().getX(),getPos().getY(),Width,Height);
+        g.setColor(color);
 
         if (getPos().getX()<0||getPos().getY()<0||getPos().getX()> TankFrame.getWIDTH()||getPos().getY()> TankFrame.getHEIGHT()){
             setAlive(false);

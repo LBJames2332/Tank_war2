@@ -1,6 +1,6 @@
 package MainClasses;
 
-import Factory.CommonFactory;
+import Objects.Common_family.CommonFactory;
 import Factory.I_Factory;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
@@ -8,6 +8,8 @@ import Objects.FirerStrategy.TankFirer_4dir;
 import Objects.GameObjs.Bullet;
 import Objects.GameObjs.Explod;
 import Objects.GameObjs.Tank;
+import Objects.Rect_family.RectFactory;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,10 +20,14 @@ public class TankFrame extends Frame{
     static final int HEIGHT = 600;
 
     private Tank myTank;
-    private I_Factory factory = new CommonFactory();
+    private I_Factory factory = new RectFactory();
     List<Bullet> l_bullet = new ArrayList<>();
     List<Tank> l_enemies = new ArrayList<>();
     List<Explod> l_explod = new ArrayList<>();
+
+    public I_Factory getFactory() {
+        return factory;
+    }
 
     public static int getWIDTH() {
         return WIDTH;

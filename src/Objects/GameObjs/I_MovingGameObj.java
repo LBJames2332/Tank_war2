@@ -38,6 +38,4 @@ public abstract class I_MovingGameObj extends I__GameObj{
     }
 
     protected abstract void move();
-
-    protected abstract void SetImage(Dir dir);
 }

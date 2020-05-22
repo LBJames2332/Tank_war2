@@ -1,5 +1,6 @@
 package Objects.FirerStrategy;
 
+import Factory.I_Factory;
 import Objects.AttributeClasses.Dir;
 import Objects.Common_family.CommonBullet;
 import Objects.FirerStrategy.Firer;
@@ -8,11 +9,11 @@ import Objects.GameObjs.Tank;
 
 public class TankFirer_4dir implements Firer {
     @Override
-    public void fire(Tank tank) {
+    public void fire(Tank tank, I_Factory factory) {
         int x,y;
         Bullet[] bullets = new Bullet[Dir.values().length];
         for (int i = 0; i < bullets.length; i++) {
-            bullets[i] = new CommonBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true, Dir.values()[i],tank.getGroup());
+            bullets[i] = factory.CreateBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true, Dir.values()[i],tank.getGroup());
         }
 
         switch (tank.getDir()){
