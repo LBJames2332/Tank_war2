@@ -12,27 +12,27 @@ public class TankFirer1 implements Firer {
         switch (tank.getDir()){
             case LEFT:
                 Bullet bulletl = new CommonBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true,tank.getDir(),tank.getGroup());
-                bulletl.setPos(tank.getPos().getX()-bulletl.getImage().getWidth(),
-                    tank.getPos().getY()+(tank.getImage().getHeight()>>1)-(bulletl.getImage().getHeight()>>1));
+                bulletl.setPos(tank.getPos().getX()-bulletl.getWidth(),
+                    tank.getPos().getY()+(tank.getHeight()>>1)-(bulletl.getHeight()>>1));
                 tank.getTf().getL_bullet().add(bulletl);
                 break;
             case RIGHT:
                 Bullet bulletr = new CommonBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true,tank.getDir(),tank.getGroup());
-                bulletr.setPos(tank.getPos().getX()+tank.getImage().getWidth(),
-                    tank.getPos().getY()+(tank.getImage().getHeight()>>1)-(bulletr.getImage().getHeight()>>1));
+                bulletr.setPos(tank.getPos().getX()+tank.getWidth(),
+                    tank.getPos().getY()+(tank.getHeight()>>1)-(bulletr.getHeight()>>1));
 
                 tank.getTf().getL_bullet().add(bulletr);
                 break;
             case UP:
                 Bullet bulletu = new CommonBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true,tank.getDir(),tank.getGroup());
-                bulletu.setPos(tank.getPos().getX()+(tank.getImage().getWidth()>>1)-(bulletu.getImage().getWidth()>>1),
-                    tank.getPos().getY()-bulletu.getImage().getHeight());
+                bulletu.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bulletu.getWidth()>>1),
+                    tank.getPos().getY()-bulletu.getHeight());
                 tank.getTf().getL_bullet().add(bulletu);
                 break;
             case DOWN:
                 Bullet bulletd = new CommonBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true,tank.getDir(),tank.getGroup());
-                bulletd.setPos(tank.getPos().getX()+(tank.getImage().getWidth()>>1)-(bulletd.getImage().getWidth()>>1),
-                    tank.getPos().getY()+tank.getImage().getHeight());
+                bulletd.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bulletd.getWidth()>>1),
+                    tank.getPos().getY()+tank.getHeight());
 
                 tank.getTf().getL_bullet().add(bulletd);
                 break;

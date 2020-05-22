@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public abstract class I__GameObj {
     private Position pos = new Position();
     private TankFrame tf = null;
-    private BufferedImage image;
+    //private BufferedImage image;
     private boolean isAlive = true;
     private Rectangle rec;
 
@@ -20,9 +20,13 @@ public abstract class I__GameObj {
     public void setRec() {
         this.rec.x = pos.getX();
         this.rec.y = pos.getY();
-        this.rec.height = image.getHeight();
-        this.rec.width = image.getWidth();
+        this.rec.height = getHeight();
+        this.rec.width = getWidth();
     }
+
+    public abstract int getWidth();
+
+    public abstract int getHeight();
 
     public I__GameObj(int x, int y, TankFrame tf, boolean isAlive) {
         this.pos.setX(x);
@@ -38,14 +42,6 @@ public abstract class I__GameObj {
 
     public void setTf(TankFrame tf) {
         this.tf = tf;
-    }
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
     }
 
     public boolean isAlive() {

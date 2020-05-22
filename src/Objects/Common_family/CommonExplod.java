@@ -7,6 +7,16 @@ import MainClasses.TankFrame;
 import java.awt.*;
 
 public class CommonExplod extends Explod {
+    @Override
+    public int getWidth() {
+        return ResourceLoader.getBoom()[0].getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return ResourceLoader.getBoom()[0].getHeight();
+    }
+
     public CommonExplod(int x, int y, TankFrame tf, boolean isAlive) {
         super(x, y, tf, isAlive);
     }

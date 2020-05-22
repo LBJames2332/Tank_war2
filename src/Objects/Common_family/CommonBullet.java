@@ -1,6 +1,7 @@
 package Objects.Common_family;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import MainClasses.TankFrame;
 import Objects.AttributeClasses.Dir;
@@ -8,7 +9,7 @@ import Objects.AttributeClasses.Group;
 import Objects.GameObjs.Bullet;
 import MainClasses.ResourceLoader;
 public class CommonBullet extends Bullet {
-
+    BufferedImage image;
 
     public CommonBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
         super(x, y, tf, isAlive, dir, group);
@@ -33,24 +34,36 @@ public class CommonBullet extends Bullet {
         }
     }
 
+
+
     @Override
     protected void SetImage(Dir dir) {
         switch (dir){
             case LEFT:
-                setImage(ResourceLoader.getBullet_Left());
+                image = ResourceLoader.getBullet_Left();
                 break;
             case RIGHT:
-                setImage(ResourceLoader.getBullet_Right());
+                image = ResourceLoader.getBullet_Right();
                 break;
             case UP:
-                setImage(ResourceLoader.getBullet_Up());
+                image = ResourceLoader.getBullet_Up();
                 break;
             case DOWN:
-                setImage(ResourceLoader.getBullet_Down());
+                image = ResourceLoader.getBullet_Down();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return image.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return image.getHeight();
     }
 
     @Override
@@ -62,16 +75,16 @@ public class CommonBullet extends Bullet {
         move();
         switch (getDir()){
             case LEFT:
-                g.drawImage(getImage(),getPos().getX(),getPos().getY(),null);
+                g.drawImage(image,getPos().getX(),getPos().getY(),null);
                 break;
             case RIGHT:
-                g.drawImage(getImage(),getPos().getX(),getPos().getY(),null);
+                g.drawImage(image,getPos().getX(),getPos().getY(),null);
                 break;
             case UP:
-                g.drawImage(getImage(),getPos().getX(),getPos().getY(),null);
+                g.drawImage(image,getPos().getX(),getPos().getY(),null);
                 break;
             case DOWN:
-                g.drawImage(getImage(),getPos().getX(),getPos().getY(),null);
+                g.drawImage(image,getPos().getX(),getPos().getY(),null);
                 break;
             default:
                 break;

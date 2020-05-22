@@ -10,19 +10,24 @@ import Objects.GameObjs.Bullet;
 import Objects.GameObjs.Tank;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class CommonTank extends Tank {
+    BufferedImage image;
+
     public CommonTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
         super(x, y, tf, isAlive, dir, isMoving, group);
     }
 
+
+
     @Override
     protected void BoundCheck() {
         if (getPos().getX()<0) setPos(0,getPos().getY());
-        if (getPos().getX()>getTf().getWidth()-getImage().getWidth()) setPos(getTf().getWidth()-getImage().getWidth(),getPos().getY());
+        if (getPos().getX()>getTf().getWidth()-image.getWidth()) setPos(getTf().getWidth()-image.getWidth(),getPos().getY());
         if (getPos().getY()<0) setPos(getPos().getX(),0);
-        if (getPos().getY()>getTf().getHeight()-getImage().getHeight()) setPos(getPos().getX(),getTf().getHeight()-getImage().getHeight());
+        if (getPos().getY()>getTf().getHeight()-image.getHeight()) setPos(getPos().getX(),getTf().getHeight()-image.getHeight());
     }
 
     @Override
@@ -76,20 +81,30 @@ public class CommonTank extends Tank {
         switch (dir){
 
             case LEFT:
-                setImage(ResourceLoader.getTank_Left());
+                image = ResourceLoader.getTank_Left();
                 break;
             case RIGHT:
-                setImage(ResourceLoader.getTank_Right());
+                image = ResourceLoader.getTank_Right();
                 break;
             case UP:
-                setImage(ResourceLoader.getTank_Up());
+                image = ResourceLoader.getTank_Up();
                 break;
             case DOWN:
-                setImage(ResourceLoader.getTank_Down());
+                image = ResourceLoader.getTank_Down();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return image.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return image.getHeight();
     }
 
     @Override
@@ -103,7 +118,7 @@ public class CommonTank extends Tank {
         SetImage(super.getDir());
         this.move();
 
-        g.drawImage(super.getImage(),super.getPos().getX(),super.getPos().getY(),null);
+        g.drawImage(image,super.getPos().getX(),super.getPos().getY(),null);
 
     }
 
