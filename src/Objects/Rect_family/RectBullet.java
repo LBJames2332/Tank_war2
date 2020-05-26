@@ -1,6 +1,7 @@
 package Objects.Rect_family;
 
 import MainClasses.TankFrame;
+import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import Objects.GameObjs.Bullet;
@@ -12,8 +13,8 @@ public class RectBullet extends Bullet {
     int Width=20;
     int Height=20;
 
-    public RectBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
-        super(x, y, tf, isAlive, dir, group);
+    public RectBullet(int x, int y, GameModel gm, boolean isAlive, Dir dir, Group group) {
+        super(x, y, gm, isAlive, dir, group);
     }
     @Override
     protected void move() {
@@ -48,7 +49,7 @@ public class RectBullet extends Bullet {
     @Override
     public void paint(Graphics g) {
         if (!isAlive()){
-            getTf().getL_bullet().remove(this);
+            getGm().getL_bullet().remove(this);
             return;
         }
         move();

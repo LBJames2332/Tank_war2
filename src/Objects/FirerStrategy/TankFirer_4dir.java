@@ -13,7 +13,7 @@ public class TankFirer_4dir implements Firer {
         int x,y;
         Bullet[] bullets = new Bullet[Dir.values().length];
         for (int i = 0; i < bullets.length; i++) {
-            bullets[i] = factory.CreateBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getTf(),true, Dir.values()[i],tank.getGroup());
+            bullets[i] = factory.CreateBullet(tank.getPos().getX(),tank.getPos().getY(),tank.getGm(),true, Dir.values()[i],tank.getGroup());
         }
 
         switch (tank.getDir()){
@@ -21,7 +21,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()-bullet.getWidth(),
                             tank.getPos().getY()+(tank.getHeight()>>1)-(bullet.getHeight()>>1));
-                    tank.getTf().getL_bullet().add(bullet);
+                    tank.getGm().getL_bullet().add(bullet);
                 }
 
                 break;
@@ -29,7 +29,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+tank.getWidth(),
                             tank.getPos().getY()+(tank.getHeight()>>1)-(bullet.getHeight()>>1));
-                    tank.getTf().getL_bullet().add(bullet);
+                    tank.getGm().getL_bullet().add(bullet);
                 }
 
 
@@ -38,7 +38,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bullet.getWidth()>>1),
                             tank.getPos().getY()-bullet.getHeight());
-                    tank.getTf().getL_bullet().add(bullet);
+                    tank.getGm().getL_bullet().add(bullet);
                 }
 
                 break;
@@ -46,7 +46,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bullet.getWidth()>>1),
                             tank.getPos().getY()+tank.getHeight());
-                    tank.getTf().getL_bullet().add(bullet);
+                    tank.getGm().getL_bullet().add(bullet);
                 }
                 break;
             default:

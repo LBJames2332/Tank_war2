@@ -1,5 +1,6 @@
 package Objects.GameObjs;
 
+import Mgr.GameModel;
 import Objects.AttributeClasses.Position;
 import MainClasses.TankFrame;
 
@@ -7,8 +8,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class I__GameObj {
+
+
     private Position pos = new Position();
-    private TankFrame tf = null;
+    private GameModel gm = null;
     //private BufferedImage image;
     private boolean isAlive = true;
     private Rectangle rec;
@@ -28,20 +31,20 @@ public abstract class I__GameObj {
 
     public abstract int getHeight();
 
-    public I__GameObj(int x, int y, TankFrame tf, boolean isAlive) {
+    public I__GameObj(int x, int y, GameModel gm, boolean isAlive) {
         this.pos.setX(x);
         this.pos.setY(y);
-        this.tf = tf;
+        this.gm = gm;
         this.isAlive = isAlive;
         rec = new Rectangle(x,y,0,0);
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGm() {
+        return gm;
     }
 
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
+    public void setGm(GameModel gm) {
+        this.gm = gm;
     }
 
     public boolean isAlive() {

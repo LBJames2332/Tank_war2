@@ -1,6 +1,7 @@
 package Objects.GameObjs;
 
 
+import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import MainClasses.TankFrame;
@@ -14,9 +15,9 @@ public abstract class I_MovingGameObj extends I__GameObj{
         return group;
     }
 
-    public I_MovingGameObj(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
+    public I_MovingGameObj(int x, int y, GameModel gm, boolean isAlive, Dir dir, Group group) {
 
-        super(x, y, tf, isAlive);
+        super(x, y, gm, isAlive);
         this.dir = dir;
         this.group = group;
     }

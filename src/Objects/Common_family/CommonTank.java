@@ -2,6 +2,7 @@ package Objects.Common_family;
 
 import MainClasses.ResourceLoader;
 import MainClasses.TankFrame;
+import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import Objects.FirerStrategy.Firer;
@@ -16,8 +17,8 @@ import java.util.Random;
 public class CommonTank extends Tank {
     BufferedImage image;
 
-    public CommonTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
-        super(x, y, tf, isAlive, dir, isMoving, group);
+    public CommonTank(int x, int y, GameModel gm, boolean isAlive, Dir dir, boolean isMoving, Group group) {
+        super(x, y, gm, isAlive, dir, isMoving, group);
     }
 
 
@@ -25,15 +26,15 @@ public class CommonTank extends Tank {
     @Override
     protected void BoundCheck() {
         if (getPos().getX()<0) setPos(0,getPos().getY());
-        if (getPos().getX()>getTf().getWidth()-image.getWidth()) setPos(getTf().getWidth()-image.getWidth(),getPos().getY());
+        if (getPos().getX()>getGm().getWidth()-image.getWidth()) setPos(getGm().getWidth()-image.getWidth(),getPos().getY());
         if (getPos().getY()<0) setPos(getPos().getX(),0);
-        if (getPos().getY()>getTf().getHeight()-image.getHeight()) setPos(getPos().getX(),getTf().getHeight()-image.getHeight());
+        if (getPos().getY()>getGm().getHeight()-image.getHeight()) setPos(getPos().getX(),getGm().getHeight()-image.getHeight());
     }
 
     @Override
     public void fire(Firer firer) {
 
-        firer.fire(this,getTf().getFactory());
+        firer.fire(this,getGm().getFactory());
     }
 
     @Override
@@ -109,8 +110,8 @@ public class CommonTank extends Tank {
     public void paint(Graphics g) {
         if (!isAlive())  {
 
-            getTf().getL_enemies().remove(this);
-            getTf().getL_explod().add(new CommonExplod(this.getPos().getX(),this.getPos().getY(),getTf(),false));
+            getGm().getL_enemies().remove(this);
+            getGm().getL_explod().add(new CommonExplod(this.getPos().getX(),this.getPos().getY(),getGm(),false));
             return;
         }
         SetImage(super.getDir());

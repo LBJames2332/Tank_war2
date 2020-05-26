@@ -1,5 +1,6 @@
 package Objects.Common_family;
 
+import Mgr.GameModel;
 import Objects.GameObjs.Explod;
 import MainClasses.ResourceLoader;
 import MainClasses.TankFrame;
@@ -17,13 +18,13 @@ public class CommonExplod extends Explod {
         return ResourceLoader.getBoom()[0].getHeight();
     }
 
-    public CommonExplod(int x, int y, TankFrame tf, boolean isAlive) {
-        super(x, y, tf, isAlive);
+    public CommonExplod(int x, int y, GameModel gm, boolean isAlive) {
+        super(x, y, gm, isAlive);
     }
 
     @Override
     public void paint(Graphics g) {
         if (!super.isAlive()) g.drawImage(ResourceLoader.getBoom()[this.step++],super.getPos().getX(),super.getPos().getY(),null);
-        if (step >= 16) super.getTf().getL_explod().remove(this);
+        if (step >= 16) super.getGm().getL_explod().remove(this);
     }
 }

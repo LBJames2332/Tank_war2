@@ -1,6 +1,7 @@
 package Objects.Rect_family;
 
 import MainClasses.TankFrame;
+import Mgr.GameModel;
 import Objects.GameObjs.Explod;
 
 import java.awt.*;
@@ -18,8 +19,8 @@ public class RectExplod extends Explod {
         return Height;
     }
 
-    public RectExplod(int x, int y, TankFrame tf, boolean isAlive) {
-        super(x, y, tf, isAlive);
+    public RectExplod(int x, int y, GameModel gm, boolean isAlive) {
+        super(x, y, gm, isAlive);
     }
 
     @Override
@@ -30,6 +31,6 @@ public class RectExplod extends Explod {
             g.fillRect(super.getPos().getX(),super.getPos().getY(),step*Width,(step++)*Height);
             g.setColor(color);
         }
-        if (step >= 16) super.getTf().getL_explod().remove(this);
+        if (step >= 16) super.getGm().getL_explod().remove(this);
     }
 }

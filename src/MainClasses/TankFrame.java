@@ -1,5 +1,6 @@
 package MainClasses;
 
+import Mgr.GameModel;
 import Objects.Common_family.CommonFactory;
 import Factory.I_Factory;
 import Objects.AttributeClasses.Dir;
@@ -19,15 +20,11 @@ public class TankFrame extends Frame{
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    private Tank myTank;
-    private I_Factory factory = new RectFactory();
-    List<Bullet> l_bullet = new ArrayList<>();
-    List<Tank> l_enemies = new ArrayList<>();
-    List<Explod> l_explod = new ArrayList<>();
 
-    public I_Factory getFactory() {
-        return factory;
-    }
+    private GameModel gameModel = new GameModel(WIDTH,HEIGHT);
+
+
+
 
     public static int getWIDTH() {
         return WIDTH;
@@ -37,19 +34,10 @@ public class TankFrame extends Frame{
         return HEIGHT;
     }
 
-    public List<Bullet> getL_bullet() {
-        return l_bullet;
-    }
 
-    public List<Tank> getL_enemies() {
-        return l_enemies;
-    }
-
-    public List<Explod> getL_explod() {
-        return l_explod;
-    }
 
     public TankFrame() {
+
         //constructor
         this.setSize(WIDTH, HEIGHT);
         this.setResizable(false);
@@ -62,37 +50,19 @@ public class TankFrame extends Frame{
                 System.exit(0);
             }
         });
-        myTank = factory.CreateTank(100, 400, this, true, Dir.DOWN, true, Group.GOOD);
-        int inialCount = Integer.parseInt((String) PropertyMgr.get("ECountInit"));
-        for (int i = 0; i < inialCount; i++) {
-            this.l_enemies.add(factory.CreateTank(50 + i * 60, 200, this, true, Dir.DOWN, true, Group.BAD));
-        }
+
+
+
+
+
+
+
+
     }
     @Override
     public void paint(Graphics g) {
         //随便画
-        Color color = g.getColor();
-        g.setColor(Color.WHITE);
-        g.drawString("B_Num:"+l_bullet.size(),10,60);
-        g.drawString("E_Num:"+l_enemies.size(),10,90);
-        g.drawString("Boom_Num:"+l_explod.size(),10,120);
-        g.setColor(color);
-        myTank.paint(g);
-        for (int i = 0; i < l_explod.size(); i++) {
-            l_explod.get(i).paint(g);
-        }
-        for (int i = 0; i < l_enemies.size(); i++) {
-            l_enemies.get(i).paint(g);
-        }
-        for (int i = 0; i < l_bullet.size(); i++) {
-            l_bullet.get(i).paint(g);
-            //if (!l_bullet.get(i).isLiving())l_bullet.remove(i);
-        }
-        for (int i = 0; i < l_enemies.size(); i++) {
-            for (int j = 0; j < l_bullet.size(); j++) {
-                l_enemies.get(i).Boom(l_bullet.get(j));
-            }
-        }
+        this.gameModel.paint(g);
     }
     class TankKeyLisener extends KeyAdapter{
         boolean bL = false;
@@ -117,7 +87,7 @@ public class TankFrame extends Frame{
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire(new TankFirer_4dir());
+                    gameModel.getMyTank().fire(new TankFirer_4dir());
                     break;
                 default:
                     break;
@@ -151,13 +121,13 @@ public class TankFrame extends Frame{
         }
 
         public void setMainTankDir(){
-            if (!bL&&!bR&&!bU&&!bD) myTank.setMoving(false);
+            if (!bL&&!bR&&!bU&&!bD) gameModel.getMyTank().setMoving(false);
             else {
-                myTank.setMoving(true);
-                if (bL) myTank.setDir(Dir.LEFT);
-                if (bR)  myTank.setDir(Dir.RIGHT);
-                if (bU) myTank.setDir(Dir.UP);
-                if (bD) myTank.setDir(Dir.DOWN);
+                gameModel.getMyTank().setMoving(true);
+                if (bL) gameModel.getMyTank().setDir(Dir.LEFT);
+                if (bR)  gameModel.getMyTank().setDir(Dir.RIGHT);
+                if (bU) gameModel.getMyTank().setDir(Dir.UP);
+                if (bD) gameModel.getMyTank().setDir(Dir.DOWN);
 
             }
 

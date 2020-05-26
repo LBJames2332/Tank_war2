@@ -1,6 +1,7 @@
 package Objects.Rect_family;
 
 import MainClasses.TankFrame;
+import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import Objects.Common_family.CommonExplod;
@@ -16,8 +17,8 @@ import java.util.Random;
 public class RectTank extends Tank {
     int Width=50;
     int Height=50;
-    public RectTank(int x, int y, TankFrame tf, boolean isAlive, Dir dir, boolean isMoving, Group group) {
-        super(x, y, tf, isAlive, dir, isMoving, group);
+    public RectTank(int x, int y, GameModel gm, boolean isAlive, Dir dir, boolean isMoving, Group group) {
+        super(x, y, gm, isAlive, dir, isMoving, group);
     }
 
 
@@ -25,15 +26,15 @@ public class RectTank extends Tank {
     @Override
     protected void BoundCheck() {
         if (getPos().getX()<0) setPos(0,getPos().getY());
-        if (getPos().getX()>getTf().getWidth()-Width) setPos(getTf().getWidth()-Width,getPos().getY());
+        if (getPos().getX()>getGm().getWidth()-Width) setPos(getGm().getWidth()-Width,getPos().getY());
         if (getPos().getY()<0) setPos(getPos().getX(),0);
-        if (getPos().getY()>getTf().getHeight()-Height) setPos(getPos().getX(),getTf().getHeight()-Height);
+        if (getPos().getY()>getGm().getHeight()-Height) setPos(getPos().getX(),getGm().getHeight()-Height);
     }
 
     @Override
     public void fire(Firer firer) {
 
-        firer.fire(this,getTf().getFactory());
+        firer.fire(this,getGm().getFactory());
     }
 
     @Override
@@ -90,8 +91,8 @@ public class RectTank extends Tank {
     public void paint(Graphics g) {
         if (!isAlive())  {
 
-            getTf().getL_enemies().remove(this);
-            getTf().getL_explod().add(getTf().getFactory().CreateExplod(this.getPos().getX(), this.getPos().getY(), getTf(), false));
+            getGm().getL_enemies().remove(this);
+            getGm().getL_explod().add(getGm().getFactory().CreateExplod(this.getPos().getX(), this.getPos().getY(), getGm(), false));
             return;
         }
         this.move();

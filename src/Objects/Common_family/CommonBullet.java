@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import MainClasses.TankFrame;
+import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
 import Objects.GameObjs.Bullet;
@@ -11,8 +12,8 @@ import MainClasses.ResourceLoader;
 public class CommonBullet extends Bullet {
     BufferedImage image;
 
-    public CommonBullet(int x, int y, TankFrame tf, boolean isAlive, Dir dir, Group group) {
-        super(x, y, tf, isAlive, dir, group);
+    public CommonBullet(int x, int y, GameModel gm, boolean isAlive, Dir dir, Group group) {
+        super(x, y, gm, isAlive, dir, group);
     }
     @Override
     protected void move() {
@@ -65,7 +66,7 @@ public class CommonBullet extends Bullet {
     @Override
     public void paint(Graphics g) {
         if (!isAlive()){
-            getTf().getL_bullet().remove(this);
+            getGm().getL_bullet().remove(this);
             return;
         }
         move();
