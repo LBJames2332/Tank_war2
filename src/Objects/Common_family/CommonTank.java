@@ -40,7 +40,6 @@ public class CommonTank extends Tank {
     @Override
     public void Boom(Bullet bullet) {
         if (bullet.getGroup().equals(getGroup())) return;
-        System.out.println(this.getClass()+" "+bullet.getClass());
         setRec();
         bullet.setRec();
         if (this.getRec().intersects(bullet.getRec())){

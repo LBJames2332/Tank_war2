@@ -1,3 +1,3 @@
 #Enemy Count at initialization
-ECountInit=2
+ECountInit=8
 Factory=Objects.Common_family.CommonFactory

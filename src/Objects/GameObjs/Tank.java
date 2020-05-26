@@ -15,7 +15,7 @@ public abstract class Tank extends I_MovingGameObj {
 
         super(x, y, gm, isAlive, dir, group);
         this.isMoving = isMoving;
-        super.setSPEED(1);
+        super.setSPEED(5);
     }
 
     public boolean isMoving() {

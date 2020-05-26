@@ -12,8 +12,6 @@ public class CommonTankTankCollider implements Collider {
             o2.setRec();
 
             if (o1.getRec().intersects(o2.getRec())){
-                System.out.println(o1.getClass());
-                System.out.println(o2.getClass());
                 ((CommonTank) o1).setMoving(false);
                 ((CommonTank) o2).setMoving(false);
             }
