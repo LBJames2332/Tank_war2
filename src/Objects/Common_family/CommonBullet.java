@@ -66,7 +66,7 @@ public class CommonBullet extends Bullet {
     @Override
     public void paint(Graphics g) {
         if (!isAlive()){
-            getGm().getL_bullet().remove(this);
+            getGm().getL_obj().remove(this);
             return;
         }
         move();

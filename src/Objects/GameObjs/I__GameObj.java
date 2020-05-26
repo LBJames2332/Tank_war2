@@ -2,10 +2,8 @@ package Objects.GameObjs;
 
 import Mgr.GameModel;
 import Objects.AttributeClasses.Position;
-import MainClasses.TankFrame;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class I__GameObj {
 

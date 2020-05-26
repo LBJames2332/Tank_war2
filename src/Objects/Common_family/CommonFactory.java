@@ -1,6 +1,9 @@
 package Objects.Common_family;
 
 import Factory.I_Factory;
+import Mgr.Collider;
+import Mgr.CommonBulletTankCollider;
+import Mgr.CommonTankTankCollider;
 import Mgr.GameModel;
 import Objects.AttributeClasses.Dir;
 import Objects.AttributeClasses.Group;
@@ -12,6 +15,10 @@ import Objects.GameObjs.Explod;
 import Objects.GameObjs.Tank;
 import MainClasses.TankFrame;
 public class CommonFactory extends I_Factory {
+    public CommonFactory() {
+        super(new CommonTankTankCollider(),new CommonBulletTankCollider());
+    }
+
     @Override
     public Tank CreateTank(int x, int y, GameModel gm, boolean isAlive, Dir dir, boolean isMoving, Group group) {
         return new CommonTank(x,y,gm,isAlive,dir,isMoving,group);

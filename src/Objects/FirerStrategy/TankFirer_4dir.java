@@ -21,7 +21,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()-bullet.getWidth(),
                             tank.getPos().getY()+(tank.getHeight()>>1)-(bullet.getHeight()>>1));
-                    tank.getGm().getL_bullet().add(bullet);
+                    tank.getGm().getL_obj().add(bullet);
                 }
 
                 break;
@@ -29,7 +29,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+tank.getWidth(),
                             tank.getPos().getY()+(tank.getHeight()>>1)-(bullet.getHeight()>>1));
-                    tank.getGm().getL_bullet().add(bullet);
+                    tank.getGm().getL_obj().add(bullet);
                 }
 
 
@@ -38,7 +38,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bullet.getWidth()>>1),
                             tank.getPos().getY()-bullet.getHeight());
-                    tank.getGm().getL_bullet().add(bullet);
+                    tank.getGm().getL_obj().add(bullet);
                 }
 
                 break;
@@ -46,7 +46,7 @@ public class TankFirer_4dir implements Firer {
                 for (Bullet bullet:bullets){
                     bullet.setPos(tank.getPos().getX()+(tank.getWidth()>>1)-(bullet.getWidth()>>1),
                             tank.getPos().getY()+tank.getHeight());
-                    tank.getGm().getL_bullet().add(bullet);
+                    tank.getGm().getL_obj().add(bullet);
                 }
                 break;
             default:

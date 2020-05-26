@@ -31,6 +31,6 @@ public class RectExplod extends Explod {
             g.fillRect(super.getPos().getX(),super.getPos().getY(),step*Width,(step++)*Height);
             g.setColor(color);
         }
-        if (step >= 16) super.getGm().getL_explod().remove(this);
+        if (step >= 16) super.getGm().getL_obj().remove(this);
     }
 }

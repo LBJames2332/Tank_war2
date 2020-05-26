@@ -10,6 +10,6 @@ public abstract class Bullet extends I_MovingGameObj {
     public Bullet(int x, int y, GameModel gm, boolean isAlive, Dir dir, Group group) {
         super(x, y, gm, isAlive, dir, group);
         //SetImage(dir);
-        super.setSPEED(10);
+        super.setSPEED(1);
     }
 }

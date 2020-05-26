@@ -3,7 +3,6 @@ package Objects.Common_family;
 import Mgr.GameModel;
 import Objects.GameObjs.Explod;
 import MainClasses.ResourceLoader;
-import MainClasses.TankFrame;
 
 import java.awt.*;
 
@@ -25,6 +24,6 @@ public class CommonExplod extends Explod {
     @Override
     public void paint(Graphics g) {
         if (!super.isAlive()) g.drawImage(ResourceLoader.getBoom()[this.step++],super.getPos().getX(),super.getPos().getY(),null);
-        if (step >= 16) super.getGm().getL_explod().remove(this);
+        if (step >= 16) super.getGm().getL_obj().remove(this);
     }
 }

@@ -40,6 +40,7 @@ public class CommonTank extends Tank {
     @Override
     public void Boom(Bullet bullet) {
         if (bullet.getGroup().equals(getGroup())) return;
+        System.out.println(this.getClass()+" "+bullet.getClass());
         setRec();
         bullet.setRec();
         if (this.getRec().intersects(bullet.getRec())){
@@ -110,8 +111,8 @@ public class CommonTank extends Tank {
     public void paint(Graphics g) {
         if (!isAlive())  {
 
-            getGm().getL_enemies().remove(this);
-            getGm().getL_explod().add(new CommonExplod(this.getPos().getX(),this.getPos().getY(),getGm(),false));
+            getGm().getL_obj().remove(this);
+            getGm().getL_obj().add(new CommonExplod(this.getPos().getX(),this.getPos().getY(),getGm(),false));
             return;
         }
         SetImage(super.getDir());
